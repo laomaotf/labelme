@@ -1370,7 +1370,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setScroll(orientation, value)
 
     def setScroll(self, orientation, value):
-        self.scrollBars[orientation].setValue(value)
+        self.scrollBars[orientation].setValue(int(value))
         self.scroll_values[orientation][self.filename] = value
 
     def setZoom(self, value):
@@ -1465,6 +1465,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.fileListWidget.repaint()
             return
 
+        filename_index = self.imageList.index(filename) + 1
+        filename_num = len(self.imageList)
+
         self.resetState()
         self.canvas.setEnabled(False)
         if filename is None:
@@ -1478,7 +1481,7 @@ class MainWindow(QtWidgets.QMainWindow):
             return False
         # assumes same name, but json extension
         self.status(
-            str(self.tr("Loading %s...")) % osp.basename(str(filename))
+            str(self.tr("Loading %s... %d")) % (osp.basename(str(filename)), filename_index)
         )
         label_file = osp.splitext(filename)[0] + ".json"
         if self.output_dir:
@@ -1585,7 +1588,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.addRecentFile(self.filename)
         self.toggleActions(True)
         self.canvas.setFocus()
-        self.status(str(self.tr("Loaded %s")) % osp.basename(str(filename)))
+        self.status(str(self.tr("Loaded %s #%d/%d")) % (osp.basename(str(filename)), filename_index,filename_num))
         return True
 
     def resizeEvent(self, event):

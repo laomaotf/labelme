@@ -1,3 +1,33 @@
+
+
+* step 1 You need install Anaconda, then run below:
+  
+```bash
+# python3
+conda create --name=labelme python=3
+source activate labelme
+conda install labelme -c conda-forge
+```
+
+* step 2 modify .labelrc in home directory
+  
+```bash
+git clone https://github.com/wkentaro/labelme.git
+cd labelme
+
+# Install anaconda3 and labelme
+#curl -L https://github.com/wkentaro/dotfiles/raw/main/local/bin/install_anaconda3.sh | bash -s .
+#source .anaconda3/bin/activate
+pip install -e .
+```
+
+
+
+
+========================================================
+
+
+
 <h1 align="center">
   <img src="labelme/icons/icon.png"><br/>labelme
 </h1>
