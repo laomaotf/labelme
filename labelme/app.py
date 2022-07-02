@@ -1464,8 +1464,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.fileListWidget.setCurrentRow(self.imageList.index(filename))
             self.fileListWidget.repaint()
             return
-
-        filename_index = self.imageList.index(filename) + 1
+        if filename in self.imageList:
+            filename_index = self.imageList.index(filename) + 1
+        else:
+            filename_index = -1
         filename_num = len(self.imageList)
 
         self.resetState()
